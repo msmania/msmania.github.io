@@ -1,0 +1,24 @@
+---
+layout: post
+title: "[雑記] 関数は呼び出し側に対して親切にふるまうべきか"
+date: 2014-04-20 08:54:33.000 +09:00
+categories:
+- C/C++
+---
+ブログにするようなネタでもないが、どうも腑に落ちなかったので書いてみる。コードのデザインに関するお話。 ある不具合が見つかりました。相当端折ってますが、記憶をたどると該当箇所はこんな感じ。センスがない、というか実に素人っぽいコードです。でもそれは別の話。 
+```
+VOID Something() { BOOL Ret = FALSE; PVOID Buffer; UsefulClass Obj;     Ret = IoAndAlloc(&Buffer); Obj.Atttach(Buffer); Buffer = NULL;     if ( !Ret ) { // error handling goto cleanup; }     // do something cleanup: if ( Buffer ) { HeapFree(Buffer); Buffer = NULL; } } BOOL IoAndAlloc(PVOID *OutBuffer) { BOOL Ret = FALSE; PVOID Buffer = NULL;     Buffer = HeapAlloc(...); if ( !Buffer ) { // error handling goto cleanup; }     if ( !DeviceIoControl(Buffer) ) { // error handling goto cleanup; }     *OutBuffer = Buffer; Buffer = NULL     // do something     Ret = TRUE; cleanup: if ( Buffer ) { HeapFree(Buffer); Buffer = NULL; }     return Ret; }
+```
+ 不具合は、DeviceIoControl が何らかの理由により失敗したときに起こります。Something の中で Buffer が初期化されていないので、変なアドレスを解放しようとしてアクセス違反によりクラッシュします。これは直さないといけません。誰がこんなコードを書いたのかは追及していませんが、作者は、「IoAndAlloc から値をもらってくるんだから、わざわざ初期化しなくてもよくね？」 と思いながらこれを書いたような気がします。 さて、どう直すか、という話です。こんな汚いコードは打ち捨てて一から書き直したくなるところですが、リスク低減のため、修正個所は最小限に留めないといけません。これを残しておくほうがよっぽどリスクのような気もしますが、今までまともに動いていたという事実があるので、泣く泣くなるべくこのコードを変えないように修正しないといけません。RTM のコードをチェックインする人は責任重大なのです。 自分ならこう直すだろう。Buffer を NULL で初期化して、ポインターを謎のクラスにアタッチする前にエラー判定を行うように順番を入れ替える。 
+```
+VOID Something() { BOOL Ret = FALSE; PVOID Buffer = NULL; UsefulClass Obj;     Ret = IoAndAlloc(&Buffer);     if ( !Ret ) { // error handling goto cleanup; }     Obj.Atttach(Buffer); Buffer = NULL;     // do something
+```
+ が、今回のケースはなぜかこうなりかけている。 
+```
+VOID Something() { BOOL Ret = FALSE; PVOID Buffer = NULL; UsefulClass Obj;     Ret = IoAndAlloc(&Buffer); Obj.Atttach(Buffer); Buffer = NULL;     if ( !Ret ) { // error handling goto cleanup; }     // do something cleanup: if ( Buffer ) { HeapFree(Buffer); Buffer = NULL; } } BOOL IoAndAlloc(PVOID *OutBuffer) { BOOL Ret = FALSE; PVOID Buffer = NULL;     if ( OutBuffer ) *OutBuffer = NULL;     Buffer = HeapAlloc(...); if ( !Buffer ) { // error handling goto cleanup; }     if ( !DeviceIoControl(Buffer) ) { // error handling goto cleanup; }     *OutBuffer = Buffer; Buffer = NULL     // do something     Ret = TRUE; cleanup: if ( Buffer ) { HeapFree(Buffer); Buffer = NULL; }     return Ret; }
+```
+ なんと、IoAndAlloc の中で OutBuffer に NULL を代入するというコードが出てきた！正確には、ある人が NULL 初期化だけのコードを提案したところ、一人のレビュアーが OutBuffer も初期化したほうがいいんでない？とコメントしたことによりこうなった、らしい。 自分の感覚が正しいのかどうか不安になってくるわけですが、どう考えても筋が悪い。いや確かにこのコードが具体的に何か悪さをするわけではないし、意図も分からないでもない。そしてこれを咎めることができない。コンピューターに悪手を指されたときの棋士の印象はこんな感じなのだろうか。 意図としては、IoAndAlloc が 「親切に」 OutBuffer の初期化もしてあげよう、なぜなら、呼び出し側が値を初期化し忘れてるかもしれないじゃないか、という感じだろうか。 外部モジュールに公開するライブラリに限らず、内部使用に留まる関数、クラス全てに当てはまる原則として、呼び出し側を信じてはいけない、というのがある、はず。呼び出し側は、引数として 何を渡してくるか分からないし、複数スレッドから同時に呼び出してくるかもしれない。エラーがあったとしてもクラッシュせず、正しくエラーを返すように書くのが基本。だから、IoAndAlloc は 「念のため」、渡されてきたポインターの中身を NULL にした。これは原則通り、と言えるのか。 いや確かに、IoAndAlloc にポインターのポインターを渡した時点で、そのポインターの値が変更されることはむしろ期待されることであって、制御が戻ってきた時に渡したポインターが NULL に変わっていたとしても、それは呼び出し側が対応できるはずである。これはその通り。 何が気に食わないかというと、IoAndAlloc があまりにも何も考えずに OutBuffer を NULL にしている点。例えば、IoAndAlloc が失敗するようなケースでは OutBuffer の中身は変わっていないことを期待したい、というのが第一感。もちろん、その期待に従って次のようなコードを書くようなことはしない。でもやっぱり、関数が変更する外部状態は最小限になるように実装したい。 
+```
+VOID Something() { BOOL Ret = FALSE; PVOID Buffer = NULL; UsefulClass Obj;     Buffer = HeapAlloc(...);     Ret = IoAndAlloc(&Buffer); if ( !Ret ) { // Buffer を使って何かやる         goto cleanup; }     // do something 
+```
+ そのレビュアーは、Something と IoAndAlloc を繋げて考えてしまったのだろう。でもこれはよくない。汎用的な発想でエラーを考えないと、リグレッションを引き起こしやすくなるのではないかと思う。 もしそれぞれの関数を単体で見るならば、OutBuffer をいきなり初期化するべき、という発想は出てこないはず。なぜなら、呼び出し側が OutBuffer をどのように使っていて、これからどのように使うか分からないからだ。今回のケースは初期化し忘れた値が入っていたが、あくまでも偶然であり、もしかすると上の例のように既に HeapAlloc された大切なポインターが入っているかもしれない。だから、何も考えずにいきなり NULL を代入するのは危険なのである。いやもちろん、その場合でも DeviceIoControl が成功すると結局 OutBuffer は書き換わってしまうので、バグが直ることはない。でも、IoAndAlloc() のファイン プレーによって Something() のエラーを助けるというのはそもそもおかしい。逆に発覚すべきバグが闇に葬られてしまう可能性がある。自分のエラーは自分で直さないといけない。 確かに呼び出し側は Buffer の変更に対応できることは予想できる、が、呼び出し側が何をしているか分からない、という観点で考えると、やはり NULL なんかを不用意に代入することで、呼び出し側が対応しきれずにエラーを引き起こすリスクは 0 ではない。はたまた別の考え方として、IoAndAlloc が OutBuffer を受け取って、それが初期化されていなかった、Windows であれば 0xCCCCCCCC が入っていた、ときに、それが単に初期化されていないのか、もしくはプログラマーが意図して代入した意味のある値かどうかを IoAndAlloc は判断できない。なので、IoAndAlloc を書く人の心理として、「もしかすると OutBuffer が初期化されていないのではないか」 という杞憂が発生してはいけない、というか自分ならそういう発想が出てこない。さらに細かく言えば、「OutBuffer の中に NULL を代入しておいた方が、DeviceIoControl が失敗したときに OutBuffer に何もしないでおくよりも状況がよくなる」 という発想は、あまりにも特定の状況を想定しすぎていて危ない。 この関数は同じファイルに定義されているし、内部で使用されるだけだからどこから呼び出されるかを列挙することも簡単にできる。だから上記のような特定の状況に応じた実装は簡単にできてしまう。それでバグが直るならいいのかもしれない。でも、自分がコードを書くときは、その関数が知っているべきことと知ることができないことを考慮した上で書いている。 とまあ、何ともしょぼい不具合から無駄に長々と考えてしまった仕事の風景でした。
