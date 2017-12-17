@@ -85,10 +85,10 @@ Network Monitor のサマリーにおいて、名前付きパイプのときも�
   - TransferSyntaxes 
     + BTFNUuid: {6CB71C2C-9812-4540-0300000000000000} 
       IfVersion: 1 (0x1)
-
- 
 ```
- 
+
+![]({{site.assets_url}}2012-03-09-image6.png)
+
 既にお気づきと思いますが、この中の 2 つは、インターフェース定義に登場しています。プログラムを書く最初に uuidgen で idl ファイルのひな型を作成しましたが、AbstractSyntax の IfUuid は、この時の IDL に埋め込まれていた UUID に一致します。
 
  

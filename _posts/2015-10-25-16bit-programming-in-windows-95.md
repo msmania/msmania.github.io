@@ -222,7 +222,9 @@ $(DEFFILE)
 ```
 UTILS.OBJ(UTILS.ASM) : fatal error L1123: _TEXT : segment defined both 16- and 32-bit
 ```
- 
+
+![]({{site.assets_url}}2015-10-25-image41.png)
+
 ここで 2 時間ぐらいハマりました。リンクエラーの原因は単純で、VC++ 1.52 のコンパイラは 16bit コードを生成しているのに対し、MASM は 32bit コードを生成しているためです。エラー メッセージの通り、16bit と 32bit の 2 つのコード セグメントを含む実行可能ファイルを生成できないためのエラーです。
 
  
