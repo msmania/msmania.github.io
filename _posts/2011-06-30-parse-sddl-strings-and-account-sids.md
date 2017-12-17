@@ -799,7 +799,7 @@ void ShowAce(BYTE AceType, PVOID RawAce) {
             if ( GuidObj ) { 
                 RpcRet= UuidToString(GuidObj, &GuidString); 
                 if ( RpcRet==RPC_S_OK ) 
-                    wprintf(L"        ObjectType:    {%s}\n", GuidString); 
+                    wprintf(L"        ObjectType:    {%raw%}{%s}i{%endraw%}\n", GuidString); 
                 else 
                     wprintf(L"UuidToString failed (%d)\n", RpcRet);
 
@@ -812,7 +812,7 @@ void ShowAce(BYTE AceType, PVOID RawAce) {
                 RpcRet= UuidToString(GuidObj, &GuidString); 
                 
                 if ( RpcRet==RPC_S_OK ) 
-                    wprintf(L"        InhObjectType: {%s}\n", GuidString); 
+                    wprintf(L"        InhObjectType: {%raw%}{%s}{%endraw%}\n", GuidString); 
                 else 
                     wprintf(L"UuidToString failed (%d)\n", RpcRet);
 
