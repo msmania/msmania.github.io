@@ -156,17 +156,14 @@ $ sudo tcpdump -nn -s0 -i eth0 -w squid.cap
 ここで少し注意。VyOS には eth0 と eth1 の 2 枚の NIC があります。tcpdump コマンドで -i any オプションを使うと、全ての NIC 上でキャプチャーを開始することができます、がしかし、パケットのイーサネット フレームが正確に記録されません。
 
  
-```
-For example, the "any" device on Linux will have a link-layer header type of DLT_LINUX_SLL even if all devices on the system at the time the "any" device is opened have some other data link type, such as DLT_EN10MB for Ethernet. 
+> For example, the "any" device on Linux will have a link-layer header type of DLT_LINUX_SLL even if all devices on the system at the time the "any" device is opened have some other data link type, such as DLT_EN10MB for Ethernet. 
 
 -- Manpage of PCAP http://www.tcpdump.org/pcap3_man.html
-```
  
 ここで出てくる DLT_LINUX_SLL とは・・・
 
  
-```
-DLT_LINUX_SLL - Linux "cooked" capture encapsulation
+> DLT_LINUX_SLL - Linux "cooked" capture encapsulation
 
 -- pcap(3): Packet Capture library - Linux man page http://linux.die.net/man/3/pcap
 ```

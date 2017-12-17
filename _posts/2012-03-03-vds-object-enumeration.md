@@ -36,9 +36,7 @@ Dump***Prop 関数は、GetProperties で取ってきた構造体をパースし
 VDS とダイナミック ディスクは星になるようです。
 
  
-```
-[Both the Virtual Disk Service and dynamic disks are deprecated as of Windows 8 Consumer Preview and Windows Server 8 Beta, and may be unavailable in subsequent versions of Windows. For more information, see Windows Storage Management API.]
-```
+> [Both the Virtual Disk Service and dynamic disks are deprecated as of Windows 8 Consumer Preview and Windows Server 8 Beta, and may be unavailable in subsequent versions of Windows. For more information, see Windows Storage Management API.]
  
 VDS サービスはスタートアップ種別が手動であり、IVdsVolume インターフェースを取得するため、IVdsServiceLoader::LoadService を呼んだときに起動され、インターフェースを破棄するとサービスが停止します。このデザインはパフォーマンス的にあまりよくない気がします。
 

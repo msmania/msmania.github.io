@@ -63,9 +63,7 @@ Dealing with Administrator and standard user’s context | Windows SDK Support T
 [https://blogs.msdn.microsoft.com/winsdk/2010/05/31/dealing-with-administrator-and-standard-users-context/](https://blogs.msdn.microsoft.com/winsdk/2010/05/31/dealing-with-administrator-and-standard-users-context/)
 
  
-```
-CreateProcess() and CreateProcessWithLogonW do not have new flags to launch the child process as elevated. Internally, CreateProcess() checks whether the target application requires elevation by looking for a manifest, determining if it is an installer, or if it has an app compat shim. If CreateProcess() determines the target application requires elevation, it simply fails with ERROR_ELEVATION_REQUIRED(740). It will not contact the AIS to perform the elevation prompt or run the app.
-```
+> CreateProcess() and CreateProcessWithLogonW do not have new flags to launch the child process as elevated. Internally, CreateProcess() checks whether the target application requires elevation by looking for a manifest, determining if it is an installer, or if it has an app compat shim. If CreateProcess() determines the target application requires elevation, it simply fails with ERROR_ELEVATION_REQUIRED(740). It will not contact the AIS to perform the elevation prompt or run the app.
  
 最後の AIS というのは Application Information Service (AppInfo サービス) という UAC を司る憎いやつです。いや、実際はお世話になっているのですが。
 

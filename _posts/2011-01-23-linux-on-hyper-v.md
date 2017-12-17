@@ -22,12 +22,10 @@ Hyper-V のゲスト OS として、Linux を動かすことができます。�
 2011 年 1 月現在、サポートされている環境としては、SUSE と Redhat のエンタープライズ版のみ。個人では入手不可能ですね。試しに、前回の記事で使った Ubuntu をインストールしてみたところ、動作しました。
 
  
-```
 前回の記事
 
-Windows Server の SNMP エージェント機能と net-snmp の連携 Part1 
-Windows Server の SNMP エージェント機能と net-snmp の連携 Part2
-```
+[Windows Server の SNMP エージェント機能と net-snmp の連携 Part1](https://msmania.wordpress.com/2010/11/06/windows-server-%E3%81%AE-smnp-%E3%82%A8%E3%83%BC%E3%82%B8%E3%82%A7%E3%83%B3%E3%83%88%E6%A9%9F%E8%83%BD%E3%81%A8-net-snmp-%E3%81%AE%E9%80%A3%E6%90%BA-part1-ubuntu-%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88/)<br />
+[Windows Server の SNMP エージェント機能と net-snmp の連携 Part2](https://msmania.wordpress.com/2010/11/06/windows-server-%e3%81%ae-smnp-%e3%82%a8%e3%83%bc%e3%82%b8%e3%82%a7%e3%83%b3%e3%83%88%e6%a9%9f%e8%83%bd%e3%81%a8-net-snmp-%e3%81%ae%e9%80%a3%e6%90%ba-part2-ubuntu-%e5%88%9d%e6%9c%9f%e8%a8%ad%e5%ae%9a/)
  
 環境は以下の通りです。
 

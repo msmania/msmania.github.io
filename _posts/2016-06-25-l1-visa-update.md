@@ -41,13 +41,11 @@ L-1 は駐在員ビザなので、基本的にはアメリカでの勤務先が�
 ポイントは、前述のようにアメリカを出ないといけないことです。アメリカ入国の時に I-94 が発行されるので、そもそも一度出国しないと新しい I-94 を発行してもらうことができないのです。では、我々日本人の場合は日本に帰らないといけないか、というと必須ではなく、基本的にはアメリカ以外ならどこでも OK です。例えばここシアトルの場合、最寄りの領事館であるカナダのバンクーバーで延長申請を行なうことは可能らしいです。ただし私の場合は、グリーンカード申請との兼ね合いもあって、リスクを最低限に抑えたかったので、高い旅費を犠牲にしても日本で延長することにしました。ちなみに社内のガイドには以下のように書かれています。
 
  
-```
-Visa stamps can be obtained at United States Consulates or Embassies outside of the United States. Procedures vary depending on consular location, so it is important that you familiarize yourself with the procedures at the location where you intend to apply well in advance of submitting the application. Most consulates require that an appointment be made in advance and that the application be submitted in-person by the visa applicant.
+> Visa stamps can be obtained at United States Consulates or Embassies outside of the United States. Procedures vary depending on consular location, so it is important that you familiarize yourself with the procedures at the location where you intend to apply well in advance of submitting the application. Most consulates require that an appointment be made in advance and that the application be submitted in-person by the visa applicant.
 
-The general rule is that you should apply for a US visa stamp at a US consulate located in your home country. Some US consulates will accept visa stamp applications from persons who are not citizens or residents of the nation in which they are located. However, because the consulates have wide discretion in these matters and most will usually not accept applications from “third country nationals”, we generally recommend that you apply for US visa stamps in your home country.
+> The general rule is that you should apply for a US visa stamp at a US consulate located in your home country. Some US consulates will accept visa stamp applications from persons who are not citizens or residents of the nation in which they are located. However, because the consulates have wide discretion in these matters and most will usually not accept applications from “third country nationals”, we generally recommend that you apply for US visa stamps in your home country.
 
-Qualifying applicants renewing select US nonimmigrant visa types, whose most recent visa was issued in India, may be able to obtain a waiver allowing them to skip the process of scheduling an interview appointment at US consulates in India.
-```
+> Qualifying applicants renewing select US nonimmigrant visa types, whose most recent visa was issued in India, may be able to obtain a waiver allowing them to skip the process of scheduling an interview appointment at US consulates in India.
  
 また、ある人がこんなことを言っていました。L-1 はあくまでも駐在員ビザであり、日本の会社に所属している人がアメリカの会社に駐在している、という体を取っている。書類に不備があった場合などは、領事館がそれを関係機関に確認しないといけないが、その場合は日本の会社に連絡が行くことが多い。このとき、第三国の領事館はそもそも日本の会社と連絡を取る必要があることを好ましく思わない、また、言語や時差の関係で連絡に時間がかかることが予想されるので、万が一に備えるならば日本の領事館に行ったほうがスムーズ。
 
@@ -101,16 +99,12 @@ Previous U.S. Travel のページの最初の質問が "Have you ever been in th
 同じ Previous U.S. Travel のページの最後の質問が、"Has anyone ever filed an immigrant petition on your behalf with the United States Citizenship and Immigration Services?" です。移民ビザやグリーンカードの申請を同時に行っている場合は Yes を選択します。ただし、petition という段階は I-140 の提出であり、PERM の申請は petition にはならないことに注意が必要です。私の場合は、グリーンカードの申請プロセスで PERM は承認済みで、AOS はまだファイルされていない状態でした。社内のガイドを見ると以下のように書かれていたので、No を選択しました。もし AOS、特に I-140 が既に申請されている場合は Yes を選択し、Explain の欄に以下に書いてあるようなコメントを書いておきます。
 
  
-```
-If any US employer has ever submitted a Form I-140 Immigrant Visa Petition for you to USCIS, then you should answer "yes." In the box that will appear under "Explain," you should enter: "[Company's name] filed an I-140 for me with USCIS." For most employees, the I-140 is the second stage of the employment-based green card process, following the PERM labor certification.
-```
+> If any US employer has ever submitted a Form I-140 Immigrant Visa Petition for you to USCIS, then you should answer "yes." In the box that will appear under "Explain," you should enter: "[Company's name] filed an I-140 for me with USCIS." For most employees, the I-140 is the second stage of the employment-based green card process, following the PERM labor certification.
  
 次に迷ったのが Additional Work/Education/Training のページの "Do you have any specialized skills or training, such as firearms, explosives, nuclear, biological, or chemical experience?" という質問です。該当する人は少数だと思いますが、私の場合、学部が生物化学科だったので Yes に該当します。社内のガイドを見ると、以下のように書かれていました。したがって Yes を選択し Explain の欄には "I was a student of the Department of Biophysics & Biochemistry at The University of Tokyo." とか書いておきました。この回答について面接で質問来るかなと思いましたが、何も聞かれませんでした。補足資料の中に大学の成績証明書が入っていたので、特に不明な点はなかったのでしょう。よかった。
 
  
-```
-Answer this question truthfully. If you have ever taken any classes in the shooting of firearms, detonation of explosives or have studied the nuclear, biological or chemical sciences at any time, answer yes to this question and detail on a separate sheet of paper where and when you received this training, who trained you and why.
-```
+> Answer this question truthfully. If you have ever taken any classes in the shooting of firearms, detonation of explosives or have studied the nuclear, biological or chemical sciences at any time, answer yes to this question and detail on a separate sheet of paper where and when you received this training, who trained you and why.
  
 あとは特に引っかかる部分はありませんでした。DS-160 フォームを送信すると、確認番号 (DS-160 Confirmation Number) が発行されます。この番号を面接予約の時に入力するのでメモっておきます。
 
@@ -175,54 +169,52 @@ Contact Information の Phone Number のところは、日本の携帯番号が�
 面接の予約が終わったら、あとは日本へ行くだけ・・・なのですが、実はその前に必要な書類を受け取らないといけません。私の場合、これが一番厄介でした。というのも、次のようは不毛なメールのやり取りをしていたためです。意見食い違いすぎ。今見返すと、弁護士 (Attorney) の言っていることも分かるのですが、情報を小出しにされている感があります。
 
  
-```
 [2016/5/13 Fri.]
 
-Me: "I've submitted DS-160. How can I get an approved I-129?"
+> Me: "I've submitted DS-160. How can I get an approved I-129?"
 
-Attorney: "You are applying for your L-1 visa at the Consulate, so the officer will approve your I-129S (L-1 application). The petition number for blanket L applications is the receipt number highlighted in the previous thread. 
+> Attorney: "You are applying for your L-1 visa at the Consulate, so the officer will approve your I-129S (L-1 application). The petition number for blanket L applications is the receipt number highlighted in the previous thread. 
 Please let me know your finalized travel plans and visa appointment date when finalized."
 
-Me: "After I submitted DS-160 to the consulate in Tokyo/Japan, I received the confirmation card attached, which says I must bring an approved I-129. Do you mean it is not needed? Only passport is good enough for L-1 extension?"
+> Me: "After I submitted DS-160 to the consulate in Tokyo/Japan, I received the confirmation card attached, which says I must bring an approved I-129. Do you mean it is not needed? Only passport is good enough for L-1 extension?"
 
-Att: "We are preparing all of the documents that you need for the interview."
+> Att: "We are preparing all of the documents that you need for the interview."
 
-Me: "When you say 'We are preparing', is it expected I can receive those documents before the interview whenever I schedule it?"
+> Me: "When you say 'We are preparing', is it expected I can receive those documents before the interview whenever I schedule it?"
 
-Att: "Yes – which is why we need to know when you are departing and your appointment date."
+> Att: "Yes – which is why we need to know when you are departing and your appointment date."
 
-Me: "That's what I wanted to confirm. I thought I would schedule an interview *after* getting all required documents."
+> Me: "That's what I wanted to confirm. I thought I would schedule an interview *after* getting all required documents."
 
 [2016/5/16 Mon.]
 
-Me: "Below is my finalized travel plan: 
+> Me: "Below is my finalized travel plan:
 Departure: May-29-2016 
 Interview: June-1-2016 
 Arrival to the US: June-13-2016"
 
-Att: "Thank you. We will finalize your paperwork next week."
+> Att: "Thank you. We will finalize your paperwork next week."
 
 このメールの後この週は一切音沙汰なし。月曜なのに next week かよ意味分からん・・とか思いながら大人しく待ってたわけです。で、翌週の月曜の朝に電話がかかってきて、今からサポートレター送るからレビューしてくれ、みたいな感じ。でそのあとのメール。
 
 [2016/5/23 Mon.]
 
-Att: "As part of the application, we have prepared a support letter (attached). Please review the support letter for accuracy... 
+> Att: "As part of the application, we have prepared a support letter (attached). Please review the support letter for accuracy... 
 In order to finish preparing the petition to be ready before his departure this weekend, we kindly request that you review the letter at your earliest convenience."
 
 ここで添付されてきたレター、なんと別の人の名前が書いてある。たぶんコピペミス。仕事が杜撰すぎ。この弁護士クビだろもう・・。その上、3 年前と違って更新の条件が厳しくなっているから正確なジョブ ディスクリプションを提出しろ、とかいろいろ言われる。いやそれ以前にお前が正確なレター送ってこいよ。この後不毛なやり取りが 2 日続く。そしてようやく。
 
 [2016/5/25 Wed.]
 
-Att: "I have incorporated the information provided in the previous threads to the draft of the support letter..."
+> Att: "I have incorporated the information provided in the previous threads to the draft of the support letter..."
 
-Me: "This looks great to me. I can sign off."
+> Me: "This looks great to me. I can sign off."
 
 [2016/5/26 Thu.]
 
-Me: "Can I receive documents today?"
+> Me: "Can I receive documents today?"
 
-Att: "We will not have the packet ready for collection until around 1pm tomorrow. Please send me a meeting invite for after 1pm to collect your paperwork from my office."
-```
+> Att: "We will not have the packet ready for collection until around 1pm tomorrow. Please send me a meeting invite for after 1pm to collect your paperwork from my office."
  
 翌日にやつのオフィスに直接出向いてようやく書類をゲット。この日が金曜で出発が日曜だから間一髪。面接の予約がもっと早かったらどうなっていたのか不明。まさに US クォリティ。
 

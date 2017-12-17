@@ -36,9 +36,7 @@ CreateProcessAsUser <br />
 [http://msdn.microsoft.com/en-us/library/ms682429(VS.85).aspx](http://msdn.microsoft.com/en-us/library/ms682429(VS.85).aspx)
 
  
-```
-Typically, the process that calls the CreateProcessAsUser function must have the SE_INCREASE_QUOTA_NAME privilege and may require the SE_ASSIGNPRIMARYTOKEN_NAME privilege if the token is not assignable. If this function fails with ERROR_PRIVILEGE_NOT_HELD (1314), use theCreateProcessWithLogonW function instead. CreateProcessWithLogonW requires no special privileges
-```
+> Typically, the process that calls the CreateProcessAsUser function must have the SE_INCREASE_QUOTA_NAME privilege and may require the SE_ASSIGNPRIMARYTOKEN_NAME privilege if the token is not assignable. If this function fails with ERROR_PRIVILEGE_NOT_HELD (1314), use theCreateProcessWithLogonW function instead. CreateProcessWithLogonW requires no special privileges
  
 そこで SE_INCREASE_QUOTA_NAME と SE_ASSIGNPRIMARYTOKEN_NAME 特権を自分のユーザーに割り当てます。ローカル セキュリティ ポリシーの設定から、それぞれ以下の特権を割り当てます。
 
@@ -58,9 +56,7 @@ Typically, the process that calls the CreateProcessAsUser function must have the
 さて、ここでユーザー入力を必要とするプログラムを起動したい場合はかなり面倒です。もう一度 MSDN に戻り、該当部分を見てみるとこんな感じ。
 
  
-```
-By default, CreateProcessAsUser creates the new process on a noninteractive window station with a desktop that is not visible and cannot receive user input. To enable user interaction with the new process, you must specify the name of the default interactive window station and desktop, "winsta0\default", in the lpDesktop member of the STARTUPINFO structure. In addition, before calling CreateProcessAsUser, you must change the discretionary access control list (DACL) of both the default interactive window station and the default desktop. The DACLs for the window station and desktop must grant access to the user or the logon session represented by the hToken parameter.
-```
+> By default, CreateProcessAsUser creates the new process on a noninteractive window station with a desktop that is not visible and cannot receive user input. To enable user interaction with the new process, you must specify the name of the default interactive window station and desktop, "winsta0\default", in the lpDesktop member of the STARTUPINFO structure. In addition, before calling CreateProcessAsUser, you must change the discretionary access control list (DACL) of both the default interactive window station and the default desktop. The DACLs for the window station and desktop must grant access to the user or the logon session represented by the hToken parameter.
  
 1. STARTUPINFO::lpDesktop 
 1. ウィンドウ ステーションの DACL に実行ユーザーを追加 

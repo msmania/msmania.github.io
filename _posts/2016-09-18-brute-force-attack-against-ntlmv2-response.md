@@ -71,16 +71,14 @@ Security guidance for NTLMv1 and LM network authentication <br />
 NTLM は Challenge Reponse Authentication の一つで、簡単に書くとサーバーとクライアントが以下 3 つのメッセージを交換することで認証が行われます。（仕様によると Connectionless モードの場合は Negotiate が存在しないようですが、見たことがないのでパス。）
 
  
-```
-Client: "I want you to authenticate me." 
+> Client: "I want you to authenticate me."
 (= Negotiate Message)
 
-Server: "Sure. Challenge me. Use 0x0123456789abcdef as a ServerChallenge." 
+> Server: "Sure. Challenge me. Use 0x0123456789abcdef as a ServerChallenge."
 (= Challenge Message)
 
-Client: "My response is !@#$%^&*()_+..." 
+> Client: "My response is !@#$%^&*()_+..."
 (= Authenticate Message)
-```
  
 NTLM は単体で使われるプロトコルではなく、必ず別のプロトコルに埋め込まれて使われます。例えば SMB の中で使われる場合には、SMB Session Setup コマンドに埋め込まれます。ダイレクト SMB ポートである 445/tcp をキャプチャーしたときの Network Monitor 上での見え方は以下の通りです。
 
@@ -228,9 +226,7 @@ Tried 999999 strings in 346 msec.
 話が逸れておきましたが、冒頭の CVE-2016-3352 の話に戻ります。Security Bulletin には、以下のような修正がなされたと書かれています。つまり、誰彼構わず NTLM SSO 認証のための SMB パケットを送るのは止めた、ということでしょうか。
 
  
-```
-The security update addresses the vulnerability by preventing NTLM SSO authentication to non-private SMB resources when users are signed in to Windows via a Microsoft Account network firewall profile for users who are signed in to Windows via a Microsoft account (https://www.microsoft.com/account) and connected to a “Guest or public networks” firewall profile.
-```
+> The security update addresses the vulnerability by preventing NTLM SSO authentication to non-private SMB resources when users are signed in to Windows via a Microsoft Account network firewall profile for users who are signed in to Windows via a Microsoft account (https://www.microsoft.com/account) and connected to a “Guest or public networks” firewall profile.
  
 この修正ができたということは、 「不特定多数のサーバーに SMB パケットを送ってしまう動作があったため、本来できないはずの brute-force 攻撃の標的になってしまう」 ことが問題とされていたわけです。これでようやく、Security Bulletin の "An attacker who successfully exploited the vulnerability could attempt to brute force" という部分が腑に落ちました。この件に関して言えば、brute-force の成功が現実的かどうかは関係なく、brute-force が可能であることそのものが問題だったわけです。NTLM はまだ生きていていいんだ。
 

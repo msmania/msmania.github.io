@@ -211,9 +211,7 @@ Guide to writing output filters - Apache HTTP Server Version 2.5 <br />
 [http://httpd.apache.org/docs/trunk/developer/output-filters.html](http://httpd.apache.org/docs/trunk/developer/output-filters.html)
 
  
-```
-A FLUSH bucket indicates that the filter should flush any buffered buckets (if applicable) down the filter chain immediately.
-```
+> A FLUSH bucket indicates that the filter should flush any buffered buckets (if applicable) down the filter chain immediately.
  
 例えば mod_substitute は前者の方法にしているので、以下のようなコメントがあります。
 

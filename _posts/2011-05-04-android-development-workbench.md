@@ -79,9 +79,7 @@ PATH= %JAVA_HOME%\bin;&lt;追加前のPATH&gt;
 前述の Android Developers のページにこんなことが書いてあります。
 
  
-```
-The "Eclipse Classic" version is recommended. Otherwise, a Java or RCP version of Eclipse is recommended
-```
+> The "Eclipse Classic" version is recommended. Otherwise, a Java or RCP version of Eclipse is recommended
  
 余計なプラグインは入れるなということでしょうか。私は "Eclipse IDE for Java Developers" をダウンロードしました。
 

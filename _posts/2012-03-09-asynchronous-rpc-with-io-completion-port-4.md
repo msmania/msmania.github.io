@@ -129,10 +129,8 @@ AbstractSyntax と TransferSyntaxes の IfUuid に加え、バージョン番号
 「Transfer Syntax って何よ」って話ですが、それはここに書いてあります。
 
  
-```
-RPC transfer syntax: A method for encoding messages defined in an Interface Definition Language (IDL) file. Remote procedure call (RPC) can support different encoding methods or transfer syntaxes. 
-http://msdn.microsoft.com/en-us/library/cc232140(v=prot.10).aspx#rpc_transfer_syntax
-```
+> RPC transfer syntax: A method for encoding messages defined in an Interface Definition Language (IDL) file. Remote procedure call (RPC) can support different encoding methods or transfer syntaxes. 
+[http://msdn.microsoft.com/en-us/library/cc232140(v=prot.10).aspx#rpc_transfer_syntax](http://msdn.microsoft.com/en-us/library/cc232140(v=prot.10).aspx#rpc_transfer_syntax)
  
 ということで、エンコードの方法を示しているようです。ということは、インターフェース UUID と違って、ランダムに生成されているものではないということです。
 
