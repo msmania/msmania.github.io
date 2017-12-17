@@ -4,15 +4,12 @@ title: About
 permalink: /about/
 ---
 
-This is the base Jekyll theme. You can find out more info about customizing your Jekyll theme, as well as basic Jekyll usage documentation at [jekyllrb.com](https://jekyllrb.com/)
+まだまだ修行中の、へっぽこエンジニアです。[https://msmania.wordpress.com/](https://msmania.wordpress.com/) から GitHub Pages に移行しました。
 
-You can find the source code for Minima at GitHub:
-[jekyll][jekyll-organization] /
-[minima](https://github.com/jekyll/minima)
+GitHub [@msmania](https://github.com/msmania/)
 
-You can find the source code for Jekyll at GitHub:
-[jekyll][jekyll-organization] /
-[jekyll](https://github.com/jekyll/jekyll)
+Qiita [@msmania](https://qiita.com/msmania)
 
+Twitter [@msmaniax](https://twitter.com/msmaniax)
 
-[jekyll-organization]: https://github.com/jekyll
+GPG key: [128B 05C0 935F B21B 15DD 1403 5FC9 5A89 1079 5927](https://pgp.mit.edu/pks/lookup?op=get&search=0x5FC95A8910795927)
