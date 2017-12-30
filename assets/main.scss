@@ -1,0 +1,12 @@
+---
+---
+
+@import "{{ site.theme }}";
+
+pre {
+  line-height:1;
+}
+code {
+  font-size:10pt;
+  font-family:Consolas, Monaco, Terminal, monospace;
+}
