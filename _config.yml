@@ -21,6 +21,8 @@ url: "https://msmania.github.io"
 twitter_username: msmaniax
 github_username: msmania
 permalink: /:year/:month/:day/:title.html
+host: 0.0.0.0
+incremental: true
 
 # Build settings
 markdown: kramdown
