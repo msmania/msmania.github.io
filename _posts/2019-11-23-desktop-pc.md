@@ -63,7 +63,7 @@ B365M DS3H (rev. 1.0) | Motherboard - GIGABYTE U.S.A.<br />
 
 ![]({{site.assets_url}}2019-11-23-06-bios-update.jpg)<br />
 
-一つだけ問題が発生。グラフィック カードを差すと Windows が起動しなくなるに遭遇。エラーメッセージは "BlInitializeLibrary failed 0xc00000bb"。まさかカーネルデバッグの出番か。
+一つだけ問題が発生。グラフィック カードを差すと Windows が起動しなくなる現象に遭遇。エラーメッセージは "BlInitializeLibrary failed 0xc00000bb"。まさかカーネルデバッグの出番か。
 
 ![]({{site.assets_url}}2019-11-23-07-boot-error.jpg)<br />
 
