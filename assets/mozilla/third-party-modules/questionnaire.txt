@@ -1,0 +1,36 @@
+Windows DLLBlocklist request form
+
+: You can remove lines starting with a colon before attaching this to a bug.
+
+1) How were we aware of the problem?
+: In most cases, we're notified via crash reports.
+: Before just blocking a suspicous module, we should spend some time on
+: analyzing crash reports.
+
+2) Is the product downloadable?  If so, do we have a local repro?
+: If we have a local repro of the issue, we might be able to come up with
+: a fix on our side without blocking the module.
+: If the product is downloadable, we should at least test it locally even
+: though the issue is not reproducible.
+
+3) What is the maximum version of the module in the crash reports?
+: You can specify this value in a new blocklist entry.
+
+4) Is the issue fixed by a newer version of the product?
+: If the issue is fixed by a newer version, upgrading the product is always
+: an ideal solution, and which fact justifies blocking older versions.
+: If not, we need to be careful because the product may no longer work after
+: we block it.
+
+5) Do we have data about the module in the third-party-module ping?
+: This ping captures a moment when the module is loaded, including
+: the module's version, a process type where the module is loaded, and
+: most importantly a callstack when the module is loaded.
+
+6) Do we know how the module is loaded?
+: There is a known injection method which cannot be blocked by our blocklist
+: (via LoadImage callback).  Moreover, blocking a known injection method
+: (via IAT modification) blocks process launch.  We cannot use our blocklist
+: in such cases.
+
+7) Describe your conclusion.

@@ -1,0 +1,57 @@
+WITH t1 AS (
+  SELECT
+    client_id,
+    DATETIME(submission_timestamp) AS submission_timestamp,
+    application.build_id,
+    application.architecture,
+    application.platform_version,
+    environment.system.os.version AS os_version,
+    environment.system.os.windows_build_number,
+    environment.system.os.windows_ubr,
+    payload.modules,
+    payload.processes
+  FROM `moz-fx-data-shared-prod.telemetry.third_party_modules`
+  WHERE
+    DATE(submission_timestamp) >= DATE_SUB(CURRENT_DATE, INTERVAL 3 DAY)
+    -- DATE(submission_timestamp) >= '2020-03-01'
+
+    -- For Beta/Release
+    AND (application.platform_version IN ('73.0', '74.0', '75.0')
+      -- To include Nightly
+      -- OR application.platform_version IN ('73.0a1', '74.0a1', '75.0a1', '76.0a1')
+    )
+
+  -- Uncomment this to get the latest results, but it's slow
+  -- ORDER BY submission_timestamp DESC
+
+  -- Always good to add the maximum limit
+  LIMIT 100
+)
+SELECT
+  client_id,
+  submission_timestamp,
+  build_id,
+  architecture,
+  platform_version,
+  os_version,
+  windows_build_number,
+  windows_ubr,
+  proc.value.process_type,
+  event.thread_name,
+  event.process_uptime_ms,
+  modules[OFFSET(event.module_index)].signed_by,
+  modules[OFFSET(event.module_index)].resolved_dll_name AS module_name,
+  modules[OFFSET(event.module_index)].file_version,
+  TO_JSON_STRING(proc.value.combined_stacks.memory_map) AS memory_map,
+  TO_JSON_STRING(proc.value.combined_stacks.stacks[OFFSET(event_index)].list) AS stack
+FROM
+  t1,
+  UNNEST(t1.processes) proc WITH OFFSET proc_index,
+  UNNEST(proc.value.events) event WITH OFFSET event_index
+WHERE
+  -- Possible process types: ('browser', 'tab', 'rdd')
+  proc.value.process_type IN ('tab', 'rdd')
+
+  -- Filter by Name or Signature
+  AND (LOWER(modules[OFFSET(event.module_index)].signed_by) LIKE 'avast%'
+       OR LOWER(modules[OFFSET(event.module_index)].resolved_dll_name) LIKE 'nv%')
