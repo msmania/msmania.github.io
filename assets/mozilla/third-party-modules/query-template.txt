@@ -15,13 +15,7 @@ WITH t1 AS (
     DATE(submission_timestamp) >= DATE_SUB(CURRENT_DATE, INTERVAL 3 DAY)
     -- DATE(submission_timestamp) >= '2020-03-01'
 
-    -- For Beta/Release
-    AND (application.platform_version IN ('73.0', '74.0', '75.0')
-      -- To include Nightly
-      -- OR application.platform_version IN ('73.0a1', '74.0a1', '75.0a1', '76.0a1')
-    )
-
-  -- Uncomment this to get the latest results, but it's slow
+  -- Uncomment this to get the latest results, but it slows down the query
   -- ORDER BY submission_timestamp DESC
 
   -- Always good to add the maximum limit
@@ -49,9 +43,9 @@ FROM
   UNNEST(t1.processes) proc WITH OFFSET proc_index,
   UNNEST(proc.value.events) event WITH OFFSET event_index
 WHERE
-  -- Possible process types: ('browser', 'tab', 'rdd')
-  proc.value.process_type IN ('tab', 'rdd')
-
   -- Filter by Name or Signature
-  AND (LOWER(modules[OFFSET(event.module_index)].signed_by) LIKE 'avast%'
-       OR LOWER(modules[OFFSET(event.module_index)].resolved_dll_name) LIKE 'nv%')
+  (LOWER(modules[OFFSET(event.module_index)].signed_by) LIKE 'avast%'
+   OR LOWER(modules[OFFSET(event.module_index)].resolved_dll_name) LIKE 'nv%')
+
+  -- Filter by Process Type
+  -- AND proc.value.process_type IN ('browser', 'tab', 'rdd')

@@ -21,6 +21,7 @@ const Aggregator = class {
       ffver: item.platform_version,
       module: item.module_name,
       modver: item.file_version,
+      uptime: item.process_uptime_ms,
       thread: fullThreadName,
     };
 
