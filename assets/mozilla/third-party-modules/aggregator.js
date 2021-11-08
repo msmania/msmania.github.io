@@ -70,7 +70,7 @@ const Aggregator = class {
     for (const [index, frame] of frames.entries()) {
       stackstr += index.toString().padStart(2, '0');
       if (frame.f0_ >= 0) {
-        let module = UntrustedModule.removePdbExt(modules[frame.f0_].f0_);
+        let module = Aggregator.removePdbExt(modules[frame.f0_].f0_);
         module += `@${modules[frame.f0_].f1_}`;
         stackstr += ` ${module}+${frame.f1_.toString(16)}${br}`;
       }
@@ -112,8 +112,13 @@ const Aggregator = class {
     control.innerHTML = 'loading...';
     const req = this.getSymbolicateRequest(index);
 
-    fetch('https://symbols.mozilla.org/symbolicate/v5',
-          {method: 'post', body: JSON.stringify(req)})
+    fetch('https://symbolication.services.mozilla.com/symbolicate/v5',
+          {method: 'POST',
+           headers: {
+             'Content-Type': 'application/json',
+             'User-Agent': 'third-party-modules-aggregator/1.0'
+           },
+           body: JSON.stringify(req)})
     .then(res => res.json())
     .then(data => {
       if (!data) {
@@ -149,3 +154,4 @@ const Aggregator = class {
     });
   }
 };
+
