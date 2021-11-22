@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<link rel="stylesheet" type="text/css" href="https://unpkg.com/tabulator-tables@4.4.3/dist/css/tabulator.min.css" />
+<script src="https://unpkg.com/tabulator-tables@4.4.3/dist/js/tabulator.js"></script> 
+<script src="./aggregator.js"></script> 
+<style>
+body {
+  font-family: Arial,Helvetica,sans-serif;
+}
+
+.tabulator-cell {
+  font-size: 9pt;
+}
+
+div#callStack {
+  font-family: Consolas, Courier, monospace;
+  font-size: 9pt;
+}
+
+span#uploadError {
+  font-size: 9pt;
+  color: red;
+}
+</style>
+</head>
+<body>
+<h1>Crash ping</h1>
+
+<input id="picker" type="file" style="display:none"
+       onchange="onUpdateFile(this.files)" />
+<button id="btnLoad">Upload JSON</button><br /><span id="uploadError"></span>
+
+<h2>List of crashes</h2>
+
+<div id="mainTable"></div>
+
+<h2>Crashing thread</h2>
+
+<div id="callStack">Click a row of the table above.</div>
+
+<script>
+function updateMainTable(cooked) {
+  mainTable = new Tabulator("#mainTable", {
+    data: cooked.mainTable(),
+    height:300,
+    columns:[
+      {title:"Id", field:"id", width:120},
+      {title:"Crashed", field:"crash_date"},
+      {title:"OS", field:"osver"},
+      {title:"Ver", field:"ffver"},
+      {title:"Build", field:"build_id", headerFilter:"input"},
+      {title:"Process", field:"process", headerFilter:"input"},
+      {title:"Reason", field:"reason", headerFilter:"input"},
+      {title:"Callstack", field:"stack_disp"},
+    ],
+    rowClick: (e, row) => {
+      cooked.showSymbolicatedCallstack(
+        document.getElementById('callStack'), row.getData().index);
+    },
+  });
+  eventTable = {};
+}
+
+function onUpdateFile(newFile) {
+  const reader = new FileReader();
+  reader.onload = event => {
+    try {
+      const json = JSON.parse(event.target.result);
+      const cooked = new Aggregator();
+      if (json.query_result) {
+        // Seems data from STMO
+        json.query_result.data.rows.forEach(el => cooked.pushCrashPing(el));
+      }
+      else if (Array.isArray(json)) {
+        // Seems data from BigQuery
+        json.forEach(el => cooked.pushCrashPing(el));
+      }
+      else {
+        document.getElementById('uploadError').innerHTML = 'Unknown format';
+        return;
+      }
+
+      document.getElementById('uploadError').innerHTML = '';
+      updateMainTable(cooked);
+    }
+    catch (e) {
+      document.getElementById('uploadError').innerHTML = e;
+    }
+  };
+  reader.readAsText(newFile[0]);
+}
+
+window.addEventListener('DOMContentLoaded', ev => {
+  document.getElementById('btnLoad').addEventListener('click',
+      ev => document.getElementById('picker').click());
+});
+</script>
+</body>
+</html>
