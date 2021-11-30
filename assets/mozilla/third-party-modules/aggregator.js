@@ -51,6 +51,7 @@ const Aggregator = class {
       id: item.id,
       osver: item.os_version,
       ffver: item.version,
+      modver: item.file_version,
       process: item.process_type,
       reason: item.type,
     };
